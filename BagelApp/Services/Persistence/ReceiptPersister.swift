@@ -4,14 +4,14 @@ import BagelCore
 
 /// Turns a parsed receipt into a persisted `ExpenseDocument` + `LineItem`s.
 enum ReceiptPersister {
-    /// Matches each line item's LLM-suggested category to an existing `Category` by
+    /// Matches each line item's LLM-suggested category to an existing `ExpenseCategory` by
     /// case-insensitive name (falling back to "Other") so free-text suggestions don't
     /// fragment the category list with near-duplicates.
     static func persist(
         _ parsed: ParsedReceipt,
         rawOCRText: String,
         payer: Person?,
-        categories: [Category],
+        categories: [ExpenseCategory],
         in context: ModelContext
     ) -> ExpenseDocument {
         let document = ExpenseDocument(

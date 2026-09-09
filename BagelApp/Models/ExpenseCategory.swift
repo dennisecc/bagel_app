@@ -1,8 +1,12 @@
 import Foundation
 import SwiftData
 
+/// Named `ExpenseCategory` rather than `Category` — the latter collides with the C
+/// typedef `Category` from objc/runtime.h, which is invisible within this module's own
+/// files but causes "ambiguous for type lookup" errors anywhere a `@testable import`
+/// brings both names into the same scope (e.g. every XCTest target).
 @Model
-final class Category {
+final class ExpenseCategory {
     @Attribute(.unique) var id: UUID
     var name: String
     var iconSystemName: String

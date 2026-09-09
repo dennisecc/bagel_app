@@ -6,7 +6,7 @@ import BagelCore
 
 struct CaptureView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Category.sortOrder) private var categories: [Category]
+    @Query(sort: \ExpenseCategory.sortOrder) private var categories: [ExpenseCategory]
     @Query(sort: \Person.createdAt) private var people: [Person]
 
     @State private var viewModel = CaptureViewModel()

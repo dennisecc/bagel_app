@@ -4,9 +4,9 @@ import SwiftData
 struct CategoryEditView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Query(sort: \Category.sortOrder) private var existingCategories: [Category]
+    @Query(sort: \ExpenseCategory.sortOrder) private var existingCategories: [ExpenseCategory]
 
-    let category: Category?
+    let category: ExpenseCategory?
 
     @State private var name: String
     @State private var iconSystemName: String
@@ -19,7 +19,7 @@ struct CategoryEditView: View {
     ]
     private static let palette = ["#5FAD56", "#F2994A", "#2D9CDB", "#F2C94C", "#BB6BD9", "#EB5757", "#828282", "#9B9B9B"]
 
-    init(category: Category?) {
+    init(category: ExpenseCategory?) {
         self.category = category
         _name = State(initialValue: category?.name ?? "")
         _iconSystemName = State(initialValue: category?.iconSystemName ?? Self.iconChoices[0])
@@ -73,7 +73,7 @@ struct CategoryEditView: View {
             category.colorHex = colorHex
         } else {
             let nextSortOrder = (existingCategories.map(\.sortOrder).max() ?? -1) + 1
-            modelContext.insert(Category(
+            modelContext.insert(ExpenseCategory(
                 name: trimmedName,
                 iconSystemName: iconSystemName,
                 colorHex: colorHex,

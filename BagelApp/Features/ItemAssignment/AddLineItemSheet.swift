@@ -4,7 +4,7 @@ import SwiftData
 struct AddLineItemSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Query(sort: \Category.sortOrder) private var categories: [Category]
+    @Query(sort: \ExpenseCategory.sortOrder) private var categories: [ExpenseCategory]
 
     let document: ExpenseDocument
 

@@ -12,7 +12,7 @@ final class PersistenceTests: XCTestCase {
         XCTAssertEqual(people.first?.name, "Me")
         XCTAssertTrue(people.first?.isDefaultOwner ?? false)
 
-        let categories = try context.fetch(FetchDescriptor<Category>())
+        let categories = try context.fetch(FetchDescriptor<ExpenseCategory>())
         XCTAssertEqual(categories.count, 8)
         XCTAssertTrue(categories.allSatisfy(\.isSystemDefault))
     }
@@ -25,7 +25,7 @@ final class PersistenceTests: XCTestCase {
         ModelContainerFactory.seedDefaultsIfNeeded(in: context)
 
         let people = try context.fetch(FetchDescriptor<Person>())
-        let categories = try context.fetch(FetchDescriptor<Category>())
+        let categories = try context.fetch(FetchDescriptor<ExpenseCategory>())
         XCTAssertEqual(people.count, 1)
         XCTAssertEqual(categories.count, 8)
     }
@@ -38,7 +38,7 @@ final class PersistenceTests: XCTestCase {
         let friend = Person(name: "Friend", colorHex: "#EB5757")
         context.insert(friend)
 
-        let category = try XCTUnwrap(try context.fetch(FetchDescriptor<Category>()).first)
+        let category = try XCTUnwrap(try context.fetch(FetchDescriptor<ExpenseCategory>()).first)
 
         let document = ExpenseDocument(
             merchantName: "Test Cafe",

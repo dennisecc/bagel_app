@@ -14,7 +14,7 @@ final class LineItem {
     var sortOrder: Int
 
     var document: ExpenseDocument?
-    var category: Category?
+    var category: ExpenseCategory?
 
     @Relationship(deleteRule: .cascade, inverse: \ItemAssignment.lineItem)
     var assignments: [ItemAssignment] = []
@@ -27,7 +27,7 @@ final class LineItem {
         lineTotal: Decimal,
         sortOrder: Int = 0,
         document: ExpenseDocument? = nil,
-        category: Category? = nil
+        category: ExpenseCategory? = nil
     ) {
         self.id = id
         self.itemDescription = itemDescription

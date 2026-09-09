@@ -3,7 +3,7 @@ import SwiftData
 
 struct CategoryPickerSheet: View {
     @Environment(\.dismiss) private var dismiss
-    @Query(sort: \Category.sortOrder) private var categories: [Category]
+    @Query(sort: \ExpenseCategory.sortOrder) private var categories: [ExpenseCategory]
 
     let lineItem: LineItem
 

@@ -7,7 +7,7 @@ final class ReceiptPersisterTests: XCTestCase {
     func testPersistMatchesCategoryCaseInsensitivelyAndFallsBackToOther() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
         let context = ModelContext(container)
-        let categories = try context.fetch(FetchDescriptor<Category>())
+        let categories = try context.fetch(FetchDescriptor<ExpenseCategory>())
 
         let parsed = ParsedReceipt(
             merchant: "Corner Store",
@@ -37,7 +37,7 @@ final class ReceiptPersisterTests: XCTestCase {
     func testPersistFlagsNeedsReviewWhenTotalsDontReconcile() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
         let context = ModelContext(container)
-        let categories = try context.fetch(FetchDescriptor<Category>())
+        let categories = try context.fetch(FetchDescriptor<ExpenseCategory>())
 
         let parsed = ParsedReceipt(
             merchant: "Corner Store",
@@ -58,7 +58,7 @@ final class ReceiptPersisterTests: XCTestCase {
     func testPersistFlagsNeedsReviewWhenConfidenceLow() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
         let context = ModelContext(container)
-        let categories = try context.fetch(FetchDescriptor<Category>())
+        let categories = try context.fetch(FetchDescriptor<ExpenseCategory>())
 
         let parsed = ParsedReceipt(
             merchant: "Corner Store",

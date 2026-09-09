@@ -3,9 +3,9 @@ import SwiftData
 
 struct ManageCategoriesView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Category.sortOrder) private var categories: [Category]
+    @Query(sort: \ExpenseCategory.sortOrder) private var categories: [ExpenseCategory]
 
-    @State private var categoryToEdit: Category?
+    @State private var categoryToEdit: ExpenseCategory?
     @State private var isPresentingNewCategory = false
 
     var body: some View {
@@ -48,7 +48,7 @@ struct ManageCategoriesView: View {
 }
 
 private struct CategoryRow: View {
-    let category: Category
+    let category: ExpenseCategory
 
     var body: some View {
         HStack {

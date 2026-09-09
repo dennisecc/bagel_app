@@ -5,7 +5,7 @@ enum ModelContainerFactory {
     static func makeContainer(inMemory: Bool = false) -> ModelContainer {
         let schema = Schema([
             Person.self,
-            Category.self,
+            ExpenseCategory.self,
             ExpenseDocument.self,
             LineItem.self,
             ItemAssignment.self
@@ -45,12 +45,12 @@ enum ModelContainerFactory {
     }
 
     private static func seedDefaultCategoriesIfNeeded(in context: ModelContext) {
-        let descriptor = FetchDescriptor<Category>(predicate: #Predicate { $0.isSystemDefault })
+        let descriptor = FetchDescriptor<ExpenseCategory>(predicate: #Predicate { $0.isSystemDefault })
         let existing = (try? context.fetch(descriptor)) ?? []
         guard existing.isEmpty else { return }
 
         for (index, defaults) in defaultCategories.enumerated() {
-            let category = Category(
+            let category = ExpenseCategory(
                 name: defaults.name,
                 iconSystemName: defaults.icon,
                 colorHex: defaults.colorHex,
