@@ -1,0 +1,19 @@
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.build/
+*.xcodeproj
+
+# XcodeGen output is regenerated via `xcodegen generate`; project.yml is the source of truth.
+BagelApp/Resources/Info.plist
+
+# Secrets
+*.xcconfig
+!Secrets.xcconfig.example
+
+# macOS
+.DS_Store
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
