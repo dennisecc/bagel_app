@@ -15,5 +15,5 @@ BagelApp/Resources/Info.plist
 # macOS
 .DS_Store
 
-# Claude Code local settings (machine-specific)
-.claude/settings.local.json
+# Claude Code local state (machine-specific)
+.claude/

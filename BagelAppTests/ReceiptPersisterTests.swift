@@ -6,7 +6,7 @@ import BagelCore
 final class ReceiptPersisterTests: XCTestCase {
     func testPersistMatchesCategoryCaseInsensitivelyAndFallsBackToOther() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
         let categories = try context.fetch(FetchDescriptor<Category>())
 
         let parsed = ParsedReceipt(
@@ -36,7 +36,7 @@ final class ReceiptPersisterTests: XCTestCase {
 
     func testPersistFlagsNeedsReviewWhenTotalsDontReconcile() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
         let categories = try context.fetch(FetchDescriptor<Category>())
 
         let parsed = ParsedReceipt(
@@ -57,7 +57,7 @@ final class ReceiptPersisterTests: XCTestCase {
 
     func testPersistFlagsNeedsReviewWhenConfidenceLow() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
         let categories = try context.fetch(FetchDescriptor<Category>())
 
         let parsed = ParsedReceipt(

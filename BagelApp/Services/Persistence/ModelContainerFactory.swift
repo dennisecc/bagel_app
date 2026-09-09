@@ -19,7 +19,11 @@ enum ModelContainerFactory {
             fatalError("Failed to create ModelContainer: \(error)")
         }
 
-        seedDefaultsIfNeeded(in: container.mainContext)
+        // `container.mainContext` is @MainActor-isolated; this function is called from
+        // BagelAppApp's stored-property initializer and from test code, neither of which
+        // is guaranteed to be on the main actor. A freshly created ModelContext writes to
+        // the same persistent store without requiring actor isolation.
+        seedDefaultsIfNeeded(in: ModelContext(container))
         return container
     }
 

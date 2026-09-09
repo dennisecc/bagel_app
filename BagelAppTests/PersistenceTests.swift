@@ -5,7 +5,7 @@ import SwiftData
 final class PersistenceTests: XCTestCase {
     func testContainerSeedsDefaultOwnerAndCategories() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         let people = try context.fetch(FetchDescriptor<Person>())
         XCTAssertEqual(people.count, 1)
@@ -19,7 +19,7 @@ final class PersistenceTests: XCTestCase {
 
     func testSeedingIsIdempotent() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         ModelContainerFactory.seedDefaultsIfNeeded(in: context)
         ModelContainerFactory.seedDefaultsIfNeeded(in: context)
@@ -32,7 +32,7 @@ final class PersistenceTests: XCTestCase {
 
     func testLineItemAssignmentPersistsAndComputesBalance() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         let me = try XCTUnwrap(try context.fetch(FetchDescriptor<Person>()).first)
         let friend = Person(name: "Friend", colorHex: "#EB5757")

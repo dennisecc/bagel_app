@@ -6,7 +6,7 @@ import BagelCore
 final class AssignmentUpdaterTests: XCTestCase {
     func testApplyEqualSplitCreatesAssignmentsSummingToLineTotal() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         let alice = Person(name: "Alice", colorHex: "#000000")
         let bob = Person(name: "Bob", colorHex: "#000000")
@@ -26,7 +26,7 @@ final class AssignmentUpdaterTests: XCTestCase {
 
     func testApplyReplacesExistingAssignments() throws {
         let container = ModelContainerFactory.makeContainer(inMemory: true)
-        let context = container.mainContext
+        let context = ModelContext(container)
 
         let alice = Person(name: "Alice", colorHex: "#000000")
         let bob = Person(name: "Bob", colorHex: "#000000")
