@@ -64,8 +64,11 @@ FAILED"). Don't guess blindly from the generic "Process completed with exit code
 
 ## Not done yet
 
-- **App icon** — no actual icon asset, `AppIcon.appiconset` is empty. Needs real
-  image assets, which means either generating them or the user supplying artwork.
+- **App icon** — done this session. A white toy-poodle pixel/perler-bead-art icon
+  (`AppIcon-1024.png`, generated with Pillow — see scratch script if it ever needs
+  regenerating), styled after a Pinterest reference the user shared but recolored
+  white on a light-blue canvas, with `Contents.json` pointing at it. Not yet seen
+  rendered on an actual home screen/simulator.
 - **Accessibility**: substantial pass done this session (see below) but still not
   verified with an actual VoiceOver run (no local device/simulator). Remaining gap:
   `ExpenseListView` row (merchant/date/total as three separate Text elements —
