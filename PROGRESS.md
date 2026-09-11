@@ -1,6 +1,6 @@
 # Bagel — Progress Notes
 
-Last updated: 2026-09-11, end of session. **CI is green** (run [34611308691](https://github.com/dennisecc/bagel_app/actions/runs/34611308691), commit `390526c` — the VoiceOver accessibility pass below compiles clean and all tests still pass).
+Last updated: 2026-09-11, end of session. **CI is green** (run [34614773388](https://github.com/dennisecc/bagel_app/actions/runs/34614773388), commit `10292a6` — the app icon asset compiles clean through `ASSETCATALOG_COMPILER` and all tests still pass).
 
 ## What this is
 
