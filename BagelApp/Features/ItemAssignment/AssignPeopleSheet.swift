@@ -85,10 +85,12 @@ struct AssignPeopleSheet: View {
                                 Spacer()
                                 if selectedPersonIDs.contains(person.id) {
                                     Image(systemName: "checkmark").foregroundStyle(.tint)
+                                        .accessibilityHidden(true)
                                 }
                             }
                         }
                         .foregroundStyle(.primary)
+                        .accessibilityAddTraits(selectedPersonIDs.contains(person.id) ? [.isSelected] : [])
                     }
                 }
 

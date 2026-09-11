@@ -36,6 +36,8 @@ struct InsightsDashboardView: View {
                         Chart(categoryTotals, id: \.categoryID) { category in
                             SectorMark(angle: .value("Total", NSDecimalNumber(decimal: category.total).doubleValue))
                                 .foregroundStyle(by: .value("Category", category.categoryName))
+                                .accessibilityLabel(category.categoryName)
+                                .accessibilityValue(Money.format(category.total))
                         }
                         .frame(height: 220)
 
@@ -57,6 +59,8 @@ struct InsightsDashboardView: View {
                                 x: .value("Month", bucket.periodStart, unit: .month),
                                 y: .value("Total", NSDecimalNumber(decimal: bucket.total).doubleValue)
                             )
+                            .accessibilityLabel(bucket.periodStart.formatted(.dateTime.month(.wide).year()))
+                            .accessibilityValue(Money.format(bucket.total))
                         }
                         .frame(height: 180)
                     }

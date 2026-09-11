@@ -65,6 +65,7 @@ private struct PersonRow: View {
                 .fill(Color(hex: person.colorHex))
                 .frame(width: 32, height: 32)
                 .overlay(Text(person.name.prefix(1)).foregroundStyle(.white).font(.headline))
+                .accessibilityHidden(true)
             Text(person.name)
             if person.isDefaultOwner {
                 Spacer()
@@ -73,6 +74,7 @@ private struct PersonRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

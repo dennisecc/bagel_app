@@ -43,6 +43,13 @@ struct BalancesView: View {
                             Text(Money.format(balance.netAmount))
                                 .foregroundStyle(balance.netAmount >= 0 ? .green : .red)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(name(for: balance.personID))
+                        .accessibilityValue(
+                            balance.netAmount >= 0
+                                ? "Is owed \(Money.format(balance.netAmount))"
+                                : "Owes \(Money.format(abs(balance.netAmount)))"
+                        )
                     }
                 }
 

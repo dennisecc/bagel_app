@@ -18,6 +18,16 @@ struct CategoryEditView: View {
         "heart.fill", "gift.fill", "pawprint.fill", "book.fill"
     ]
     private static let palette = ["#5FAD56", "#F2994A", "#2D9CDB", "#F2C94C", "#BB6BD9", "#EB5757", "#828282", "#9B9B9B"]
+    private static let paletteNames: [String: String] = [
+        "#5FAD56": "Green", "#F2994A": "Orange", "#2D9CDB": "Blue", "#F2C94C": "Yellow",
+        "#BB6BD9": "Purple", "#EB5757": "Red", "#828282": "Gray", "#9B9B9B": "Light Gray"
+    ]
+    private static let iconNames: [String: String] = [
+        "cart.fill": "Cart", "fork.knife": "Fork and knife", "car.fill": "Car", "bolt.fill": "Bolt",
+        "film.fill": "Film", "bag.fill": "Bag", "doc.text.fill": "Document", "questionmark.circle.fill": "Question mark",
+        "airplane": "Airplane", "house.fill": "House", "heart.fill": "Heart", "gift.fill": "Gift",
+        "pawprint.fill": "Paw print", "book.fill": "Book"
+    ]
 
     init(category: ExpenseCategory?) {
         self.category = category
@@ -34,11 +44,16 @@ struct CategoryEditView: View {
                 Section("Icon") {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6)) {
                         ForEach(Self.iconChoices, id: \.self) { icon in
-                            Image(systemName: icon)
-                                .font(.title2)
-                                .foregroundStyle(icon == iconSystemName ? Color(hex: colorHex) : .secondary)
-                                .frame(maxWidth: .infinity, minHeight: 36)
-                                .onTapGesture { iconSystemName = icon }
+                            Button {
+                                iconSystemName = icon
+                            } label: {
+                                Image(systemName: icon)
+                                    .font(.title2)
+                                    .foregroundStyle(icon == iconSystemName ? Color(hex: colorHex) : .secondary)
+                                    .frame(maxWidth: .infinity, minHeight: 36)
+                            }
+                            .accessibilityLabel(Self.iconNames[icon] ?? icon)
+                            .accessibilityAddTraits(icon == iconSystemName ? [.isSelected] : [])
                         }
                     }
                 }
@@ -47,6 +62,7 @@ struct CategoryEditView: View {
                     Picker("Color", selection: $colorHex) {
                         ForEach(Self.palette, id: \.self) { hex in
                             Circle().fill(Color(hex: hex)).frame(width: 24, height: 24).tag(hex)
+                                .accessibilityLabel(Self.paletteNames[hex] ?? hex)
                         }
                     }
                     .pickerStyle(.palette)

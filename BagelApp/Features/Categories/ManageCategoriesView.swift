@@ -55,14 +55,17 @@ private struct CategoryRow: View {
             Image(systemName: category.iconSystemName)
                 .foregroundStyle(Color(hex: category.colorHex))
                 .frame(width: 28)
+                .accessibilityHidden(true)
             Text(category.name)
             if category.isSystemDefault {
                 Spacer()
                 Image(systemName: "lock.fill")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .accessibilityLabel("Default category")
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

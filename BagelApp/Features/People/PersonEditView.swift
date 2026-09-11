@@ -11,6 +11,10 @@ struct PersonEditView: View {
     @State private var colorHex: String
 
     private static let palette = ["#4A90D9", "#5FAD56", "#F2994A", "#BB6BD9", "#EB5757", "#2D9CDB", "#F2C94C"]
+    private static let paletteNames: [String: String] = [
+        "#4A90D9": "Blue", "#5FAD56": "Green", "#F2994A": "Orange", "#BB6BD9": "Purple",
+        "#EB5757": "Red", "#2D9CDB": "Light Blue", "#F2C94C": "Yellow"
+    ]
 
     init(person: Person?) {
         self.person = person
@@ -29,6 +33,7 @@ struct PersonEditView: View {
                             .fill(Color(hex: hex))
                             .frame(width: 24, height: 24)
                             .tag(hex)
+                            .accessibilityLabel(Self.paletteNames[hex] ?? hex)
                     }
                 }
                 .pickerStyle(.palette)

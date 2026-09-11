@@ -18,14 +18,17 @@ struct CategoryPickerSheet: View {
                         Image(systemName: category.iconSystemName)
                             .foregroundStyle(Color(hex: category.colorHex))
                             .frame(width: 28)
+                            .accessibilityHidden(true)
                         Text(category.name)
                         Spacer()
                         if lineItem.category?.id == category.id {
                             Image(systemName: "checkmark")
+                                .accessibilityHidden(true)
                         }
                     }
                 }
                 .foregroundStyle(.primary)
+                .accessibilityAddTraits(lineItem.category?.id == category.id ? [.isSelected] : [])
             }
             .navigationTitle("Category")
             .navigationBarTitleDisplayMode(.inline)
