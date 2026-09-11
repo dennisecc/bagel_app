@@ -1,6 +1,6 @@
 # Bagel — Progress Notes
 
-Last updated: 2026-09-11, end of session. **CI is green** (run [34614773388](https://github.com/dennisecc/bagel_app/actions/runs/34614773388), commit `10292a6` — the app icon asset compiles clean through `ASSETCATALOG_COMPILER` and all tests still pass).
+Last updated: 2026-09-11, end of session. **CI is green** (run [34616247798](https://github.com/dennisecc/bagel_app/actions/runs/34616247798), commit `dbff824` — both `build-and-test` and the new `build-unsigned-ipa` job passed; a `BagelApp-unsigned-ipa` artifact is downloadable from that run for Sideloadly).
 
 ## What this is
 
