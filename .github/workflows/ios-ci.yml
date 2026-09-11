@@ -71,3 +71,56 @@ jobs:
             -scheme BagelApp \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device_name }}" \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO
+
+  build-unsigned-ipa:
+    # Produces an unsigned .ipa for real-device testing (e.g. via Sideloadly/AltStore
+    # with a free Apple ID) since this project has no paid Apple Developer account and
+    # no Mac here can run Xcode locally to build straight to a device.
+    runs-on: macos-15
+    needs: build-and-test
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      # Same placeholder as the test job — the live Anthropic capture pipeline won't
+      # work in this build until a real key is wired in (see PROGRESS.md).
+      - name: Create placeholder Secrets.xcconfig
+        run: |
+          cat > Secrets.xcconfig <<'EOF'
+          // CI placeholder — never a real key. Tests mock all network calls.
+          ANTHROPIC_API_KEY = ci-placeholder-not-a-real-key
+          EOF
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Archive unsigned build for a real device
+        run: |
+          xcodebuild archive \
+            -project BagelApp.xcodeproj \
+            -scheme BagelApp \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/BagelApp.xcarchive \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO
+
+      - name: Package .ipa
+        run: |
+          mkdir -p Payload
+          cp -r build/BagelApp.xcarchive/Products/Applications/BagelApp.app Payload/
+          zip -r BagelApp-unsigned.ipa Payload
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BagelApp-unsigned-ipa
+          path: BagelApp-unsigned.ipa
+          retention-days: 14

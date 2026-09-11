@@ -151,12 +151,29 @@ discussed but not pursued further:
 - An older Xcode (15.x/16.0) from developer.apple.com/download (free Apple ID,
   no $99/year program needed) would still support macOS Sequoia + iOS 17 SDK and
   give back full local Simulator/debugging — untried.
-- CI build + sideload to a real iPhone via Sideloadly/AltStore (free, ad-hoc
-  7-day resign cycle) — untried, would let the user actually use the app on a
-  device without any Mac purchase.
 - Pivoting off native Swift entirely (Expo/React Native) — explicitly rejected
   earlier, would throw away all current work. Only reconsider as an absolute
   last resort.
+
+## Device testing via Sideloadly (set up 2026-09-11)
+
+CI now has a second job, `build-unsigned-ipa` (runs after `build-and-test` passes,
+only on pushes to `main` or manual `workflow_dispatch`), that archives a Release
+build for a real device with `CODE_SIGNING_ALLOWED=NO` and packages it as
+`BagelApp-unsigned.ipa`, uploaded as a workflow artifact (14-day retention). This
+lets the user sideload onto their own iPhone with a free Apple ID, no $99/year
+Developer Program needed — see chat for the full Sideloadly walkthrough (download
+artifact from the Actions run → Sideloadly app → plug in iPhone → sign with Apple ID
+→ trust the developer profile in Settings). Free-tier signing expires after 7 days;
+app has to be re-signed (not reinstalled) periodically.
+
+**Known limitation**: this build still bakes in the CI placeholder
+`ANTHROPIC_API_KEY`, so the live OCR → LLM capture step will fail on-device with an
+auth error. Manual entry and everything else (assignment, splitting, settlement,
+insights) works fine. To get live capture working on a sideloaded build, a real key
+would need to be added as a GitHub Actions repo secret and wired into the
+`build-unsigned-ipa` job specifically (not the test job) — not done yet, revisit if
+the user wants to test that pipeline on-device.
 
 ## Security note
 
