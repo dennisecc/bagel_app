@@ -1,6 +1,6 @@
 # Bagel — Progress Notes
 
-Last updated: 2026-09-11, end of session. **CI is green as of the last commit** (run [34333870287](https://github.com/dennisecc/bagel_app/actions/runs/34333870287) — all 13 steps passed, including `BagelAppTests` actually executing on an iOS Simulator). This session's accessibility changes are pushed but not yet re-verified by a fresh CI run — check Actions after this push before trusting it's still green.
+Last updated: 2026-09-11, end of session. **CI is green** (run [34611308691](https://github.com/dennisecc/bagel_app/actions/runs/34611308691), commit `390526c` — the VoiceOver accessibility pass below compiles clean and all tests still pass).
 
 ## What this is
 
@@ -181,13 +181,13 @@ a token shouldn't be needed again for normal `git push`/`git pull`).
 
 ## Suggested next steps, in rough priority order
 
-1. Check the CI run for this session's accessibility commit — confirm still green
-   before trusting any of it compiles.
-2. If the user got any form of Xcode access over the break, do a real interactive
+1. If the user got any form of Xcode access over the break, do a real interactive
    Simulator pass with VoiceOver on — this is the first time anyone (human or CI)
    has looked at the actual UI rendering or heard the accessibility changes above.
-3. Add a real Anthropic API key to `Secrets.xcconfig` locally (never commit it) and
+   (CI confirms it compiles and unit tests pass — run 34611308691, commit `390526c`
+   — but not that VoiceOver actually reads it the way it's intended to.)
+2. Add a real Anthropic API key to `Secrets.xcconfig` locally (never commit it) and
    test the live capture → OCR → LLM pipeline end-to-end with a real photo.
-4. App icon.
-5. Consider adding the CI-build-and-sideload path if the user wants the app on
+3. App icon.
+4. Consider adding the CI-build-and-sideload path if the user wants the app on
    their actual phone before any of the above.
